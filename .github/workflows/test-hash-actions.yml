@@ -31,6 +31,7 @@ jobs:
         uses: technote-space/get-diff-action@f27caffdd0fb9b13f4fc191c016bb4e0632844af
         id: get_diff_test
         with:
+          PATTERNS: ''
           FILES: 'README.md'
 
       - name: Output diff
