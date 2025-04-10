@@ -35,4 +35,4 @@ jobs:
 
       - name: Output diff
         if: steps.get_diff_test.outputs.diff
-        run: echo "Diff: ${{ steps.get_diff_test.outputs.diff }}"
+        run: echo 'Diff: ${{ steps.get_diff_test.outputs.diff }}'
