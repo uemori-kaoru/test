@@ -31,8 +31,8 @@ jobs:
         uses: technote-space/get-diff-action@f27caffdd0fb9b13f4fc191c016bb4e0632844af
         id: get_diff_test
         with:
-          FILES: 'README.md' # テスト対象のファイルを指定
+          FILES: 'README.md'
 
       - name: Output diff
+        if: steps.get_diff_test.outputs.diff
         run: echo "Diff: ${{ steps.get_diff_test.outputs.diff }}"
-        if: steps.get_diff_test.outputs.diff # 差分が存在する場合のみ実行
