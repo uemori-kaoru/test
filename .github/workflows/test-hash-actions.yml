@@ -1,0 +1,38 @@
+name: Test Hash Actions
+
+on:
+  push:
+    branches:
+      - test
+
+jobs:
+  test_actions:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Test ruby/setup-ruby@v1
+        uses: ruby/setup-ruby@354a1ad156761f5ee2b7b13fa8e09943a5e8d252
+        with:
+          ruby-version: '3.3.5'
+          bundler-cache: true
+      
+      - name: Test fujiwara/lambroll@v0
+        uses: fujiwara/lambroll@cd72a41776a30c05ec0ea73af0902c01d9b64e81
+        with:
+          version: v0.12.3
+
+      - name: Test fujiwara/lambroll@v1
+        uses: fujiwara/lambroll@febaa8df8bc65284e4b196b8359cb065e82d63cb
+        with:
+          version: v1.0.1
+
+      - name: Test technote-space/get-diff-action@v6
+        uses: technote-space/get-diff-action@f27caffdd0fb9b13f4fc191c016bb4e0632844af
+        id: get_diff_test
+        with:
+          FILES: 'README.md' # テスト対象のファイルを指定
+
+      - name: Output diff
+        run: echo "Diff: ${{ steps.get_diff_test.outputs.diff }}"
+        if: steps.get_diff_test.outputs.diff # 差分が存在する場合のみ実行
